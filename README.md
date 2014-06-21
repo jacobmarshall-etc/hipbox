@@ -32,7 +32,7 @@ Options
 
   The position to display the chatbox on the users screen. Must be one of the following options; "top left", "top right", "bottom left", "bottom right". These options can also be seperated with a dash ("-") instead of a space.
 
-- **timezone** [String] (Optional)
+- **timezone** [String] Optional
 
   The timezone in which HipChat uses to display timestamps. By default this is automatically detected, but if it cannot be, it falls back to "PST".
 
@@ -40,7 +40,7 @@ Options
 
   Sets the CSS animations on/off. Default is set to true for browsers that support it.
 
-- **domain** [String] (Experimental)
+- **domain** [String] Experimental
 
   The domain in which the HipChat server resides. Default is set to "http://www.hipchat.com".
 
