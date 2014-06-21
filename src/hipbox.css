@@ -1,0 +1,103 @@
+.hipbox,
+.hipbox *,
+.hipbox *:before,
+.hipbox *:after {
+    box-sizing: border-box;
+}
+
+.hipbox {
+    position: absolute;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.hipbox-top-left,
+.hipbox-top-right {
+    top: 0;
+}
+
+.hipbox-bottom-left,
+.hipbox-bottom-right {
+    bottom: 0;
+}
+
+.hipbox-top-left,
+.hipbox-bottom-left {
+    left: 0;
+}
+
+.hipbox-top-right,
+.hipbox-bottom-right {
+    right: 0;
+}
+
+.hipbox-inner {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.hipbox-inner {
+    background: #ffffff;
+    border: 1px solid #313948;
+    overflow: hidden;
+}
+
+.hipbox-top-left .hipbox-inner,
+.hipbox-top-right .hipbox-inner {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top: 0;
+}
+
+.hipbox-bottom-left .hipbox-inner,
+.hipbox-bottom-right .hipbox-inner {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 0;
+}
+
+.hipbox-heading {
+    background-color: #313948;
+    padding: 7px 12px;
+    cursor: pointer;
+}
+
+.hipbox-title {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.hipbox-title,
+.hipbox-caption {
+    font-weight: 300;
+}
+
+.hipbox-caption {
+    display: block;
+    font-size: 13px;
+    color: #cfcfcf;
+    margin: 0;
+}
+
+.hipbox-content {
+    position: relative;
+}
+
+.hipbox-animate .hipbox-content {
+    transition: height .4s;
+}
+
+.hipbox:not(.hipbox-open) .hipbox-content {
+    height: 0 !important;
+}
+
+.hipbox-frame {
+    border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

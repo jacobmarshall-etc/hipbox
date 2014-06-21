@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../src/hipbox.css">
+</head>
+<body>
+    <script src="../src/hipbox.js"></script>
+    <script>
+        Hipbox.config({
+            title: 'Acme Support',
+            caption: 'Ask us anything!',
+            message: 'Hello World!',
+
+            key: 'gsLiTJwzU',
+            position: 'bottom right',
+            timezone: 'NZST',
+            animations: true,
+
+            domain: 'http://www.hipchat.com', // default
+
+            width: 400,
+            height: 500,
+            open: false, // default
+
+            beforeOpen: function () {
+                return true;
+            },
+            beforeClose: function () {
+                return true;
+            },
+
+            whenOpen: function () {
+                console.log('Opened!');
+            },
+            whenClose: function () {
+                console.log('Closed!');
+            }
+        });
+    </script>
+</body>
+</html>
