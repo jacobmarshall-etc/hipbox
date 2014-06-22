@@ -187,7 +187,9 @@
         var headingElement = findElement('heading');
 
         // Attach an event that switches show/hide the config on/off
-        addEvent(headingElement, 'click', self.toggle);
+        addEvent(headingElement, 'click', function () {
+            self.config({ open: ! options.open });
+        });
     }
 
     function invokeCallback (cb, def) {
