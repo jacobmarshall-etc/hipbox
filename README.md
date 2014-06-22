@@ -5,6 +5,8 @@ A lightweight embeddable Hipchat box
 
 Please note: this project is a work in progress, if you do decide to use it, please remember that the API is not final, and is subject to change at any point. The removal of features/functionality is also possible in dev versions.
 
+Hipbox has no dependencies on any other libraries.
+
 API
 ---
 
@@ -20,6 +22,17 @@ Hipbox.config({
 ```
 
 This API allows the modification of all [options](#options). All options are cached within a private scope, and whenever a change is made, only the options that have changed are used to make any DOM modifications.
+
+Compatibility
+---
+
+| Browser           | Version |
+| ----------------- | ------- |
+| Internet Explorer | 8+      |
+| Mozilla Firefox   | 3.5+    |
+| Google Chrome     | *       |
+| Apple Safari      | *       |
+| Opera             | 10+     |
 
 Options
 ---
