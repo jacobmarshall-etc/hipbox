@@ -107,4 +107,4 @@ The result is a directory named `dist` in the root of the project, containing bo
 Example
 ---
 
-![Example Screenshot](-https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)
+![Example Screenshot](https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)
