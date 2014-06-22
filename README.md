@@ -75,15 +75,15 @@ This API allows the modification of all [options](#options). All options are cac
 
   The domain in which the HipChat server resides. Default is `http://www.hipchat.com`.
 
-- **width** [Number]
+- **width** [Number] Optional
 
   The width of the chat box. Default is `400`.
 
-- **height** [Number]
+- **height** [Number] Optional
 
   The height of the chat box. Default is `500`.
 
-- **open** [Boolean]
+- **open** [Boolean] Optional
 
   Whether the chat box is open by default. Default is set to `false`.
 
