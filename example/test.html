@@ -9,11 +9,16 @@
     <script>
         Hipbox.config({
             title: 'Ask us anything!',
-            caption: 'Powered by HipChat',
 
             key: 'gsLiTJwzU',
             width: 360,
-            height: 400
+            height: 400,
+
+            whenOpen: function () {
+                Hipbox.config({
+                    caption: 'Powered by HipChat'
+                });
+            }
         });
     </script>
 </body>
