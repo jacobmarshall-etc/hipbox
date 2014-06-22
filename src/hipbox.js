@@ -9,7 +9,8 @@
         old = {},
 
         // An empty function with no operations :(
-        noop = function () {};
+        noop = function () {},
+        firstUpdate = true;
 
     function whenReady (cb, ctx) {
         var hasInvoked = false;
@@ -174,9 +175,9 @@
         return parseUrl(domain + '/' + options.key + '?' + params);
     }
 
-    function hasChanged (opt) {
+    function needsUpdate (opt) {
         // Check if the old option is not the same as the new one
-        return old[opt] !== options[opt];
+        return old[opt] !== options[opt] || firstUpdate;
     }
 
     function registerEvents () {
@@ -202,69 +203,130 @@
         return typeof value !== 'undefined' ? value : def;
     }
 
-    function update () {
-        if (hasChanged('animations')) {
-            modifyClass(domElement, 'hipbox-animate', !! options.animations);
+    function getOption (key, def) {
+        if (typeof options[key] !== 'undefined') {
+            // If the option has been defined, return value
+            return options[key];
+        } else {
+            // The option does not exist, return the default
+            return def;
         }
+    }
 
-        if (hasChanged('open')) {
-            var setOpen = !! options.open;
+    function updateAnimations (value) {
+        modifyClass(domElement, 'hipbox-animate', value);
+    }
 
-            // Get the callback which hooks into the open/close action
-            var beforeFunc = setOpen ? options.beforeOpen : options.beforeClose;
+    function updateOpen (value) {
+        // Get the callback which hooks into the open/close action
+        var beforeFunc = value ? options.beforeOpen : options.beforeClose;
 
-            // See if the callback allows the method, default allow
-            var allowAction = invokeCallback(beforeFunc, true);
+        // See if the callback allows the method, default allow
+        var allowAction = invokeCallback(beforeFunc, true);
 
-            if (allowAction) {
-                // Tell the host that the box is now open, ignore return value
-                var afterFunc = setOpen ? options.whenOpen : options.whenClose;
-                invokeCallback(afterFunc);
+        if (allowAction) {
+            // Tell the host that the box is now open, ignore return value
+            var afterFunc = value ? options.whenOpen : options.whenClose;
+            invokeCallback(afterFunc);
 
-                // Toggle the open class based on if we want to open/close
-                modifyClass(domElement, 'hipbox-open', setOpen);
+            // Toggle the open class based on if we want to open/close
+            modifyClass(domElement, 'hipbox-open', value);
 
-                // TODO Shift out of here, should be else ware
-                // Handle setting the frame source url on first open
-                var frameElement = findElement('frame');
-                var chatUrl = getChatUrl();
-                var urlChanged = frameElement.src !== chatUrl;
+            // TODO Shift out of here, should be else ware
+            // Handle setting the frame source url on first open
+            var frameElement = findElement('frame');
+            var chatUrl = getChatUrl();
+            var urlChanged = frameElement.src !== chatUrl;
 
-                // Set the frames url, if we're opening, and the url
-                // is set to changed.
-                if (setOpen && urlChanged) {
-                    frameElement.src = chatUrl;
-                }
-            } else {
-                // If the action was rejected by the host, set the option back
-                options.open = old.open || false;
+            // Set the frames url, if we're opening, and the url
+            // is set to changed.
+            if (value && urlChanged) {
+                frameElement.src = chatUrl;
             }
+        } else {
+            // If the action was rejected by the host, set the option back
+            options.open = old.open || false;
         }
+    }
 
-        if (hasChanged('title')) {
-            var titleElement = findElement('title');
-            titleElement.innerHTML = parseText(options.title);
-        }
+    function updateTitle (value) {
+        var titleElement = findElement('title');
+        // Parse the input as text + set as title content
+        titleElement.innerHTML = parseText(value);
+    }
 
-        if (hasChanged('caption')) {
-            var textCaption = parseText(options.caption);
-            var captionElement = findElement('caption');
-            captionElement.innerHTML = textCaption;
-        }
+    function updateCaption (value) {
+        var captionElement = findElement('caption');
+        // Parse the input as text + set as caption content
+        captionElement.innerHTML = parseText(value);
+    }
 
-        if (hasChanged('position')) {
-            var positionSuffix = options.position.replace(' ', '-');
-            addClass(domElement, 'hipbox-' + positionSuffix);
-        }
+    function updatePosition (value) {
+        // Parse the input as a valid hipchat-* class to apply positional styling
+        var positionSuffix = value.replace(' ', '-');
+        addClass(domElement, 'hipbox-' + positionSuffix);
+    }
 
+    function updateHeight (value) {
         var contentElement = findElement('content');
-        if (hasChanged('height')) {
-            contentElement.style.height = options.height + 'px';
+        // Set the height of the Hipbox content div
+        contentElement.style.height = value + 'px';
+    }
+
+    function updateWidth (value) {
+        var contentElement = findElement('content');
+        // Set the width of the Hipbox content div
+        contentElement.style.width = value + 'px';
+    }
+
+    function updateDom () {
+        whenReady(function () {
+            // Add the dom element to the body
+            document.body.appendChild(domElement);
+
+            // Register the events
+            registerEvents();
+        });
+    }
+
+    function update () {
+        if (needsUpdate('animations')) {
+            updateAnimations(getOption('animations', true));
         }
 
-        if (hasChanged('width')) {
-            contentElement.style.width = options.width + 'px';
+        if (needsUpdate('open')) {
+            updateOpen(getOption('open', false));
         }
+
+        if (needsUpdate('title')) {
+            updateTitle(getOption('title', ''));
+        }
+
+        if (needsUpdate('caption')) {
+            updateCaption(getOption('caption', ''));
+        }
+
+        if (needsUpdate('position')) {
+            updatePosition(getOption('position', 'bottom right'));
+        }
+
+        if (needsUpdate('height')) {
+            updateHeight(getOption('height', 500));
+        }
+
+        if (needsUpdate('width')) {
+            updateWidth(getOption('width', 400));
+        }
+
+        if (firstUpdate) {
+            // If there has not yet been a push to the dom, push the
+            // Hipbox elements to the dom (once the dom has finished loading).
+            updateDom();
+
+            // We've successfully updated the dom, prevent unwanted updates
+            firstUpdate = false;
+        }
+
     }
 
     var domElement = parseElement(
@@ -280,14 +342,6 @@
             '</div>' +
         '</div>'
     );
-
-    whenReady(function () {
-        // Add the dom element to the body
-        document.body.appendChild(domElement);
-
-        // Register the events
-        registerEvents();
-    });
 
     self.config = function (opts) {
         // Store the old options + new
