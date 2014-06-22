@@ -160,19 +160,21 @@
     }
 
     function getChatUrl () {
-        // Get the domain that the HipChat server sits on
-        var domain = options.domain || 'http://www.hipchat.com';
+        // Get the domain that the HipChat server sits on & the room
+        // key (must be set, or HipChat throws a hissy).
+        var domain = getOption('domain', 'http://www.hipchat.com');
+        var key = getOption('key', '');
 
         // Serialise the search parameters to pass through
         var params = getParams({
             anonymous: true,
             minimal: true,
-            timezone: options.timezone || getTimezone(),
-            'welcome_msg': options.message || ''
+            timezone: getOption('timezone', getTimezone()),
+            'welcome_msg': getOption('message', '')
         });
 
         // Construct the valid HipChat room url
-        return parseUrl(domain + '/' + options.key + '?' + params);
+        return parseUrl(domain + '/' + key + '?' + params);
     }
 
     function needsUpdate (opt) {
@@ -185,9 +187,7 @@
         var headingElement = findElement('heading');
 
         // Attach an event that switches show/hide the config on/off
-        addEvent(headingElement, 'click', function () {
-            self.config({ open: ! options.open });
-        });
+        addEvent(headingElement, 'click', self.toggle);
     }
 
     function invokeCallback (cb, def) {
@@ -280,13 +280,20 @@
     }
 
     function updateDom () {
-        whenReady(function () {
-            // Add the dom element to the body
-            document.body.appendChild(domElement);
+        if (firstUpdate) {
+            // If there has not yet been a push to the dom, push the
+            // Hipbox elements to the dom (once the dom has finished loading).
+            whenReady(function () {
+                // Add the dom element to the body
+                document.body.appendChild(domElement);
 
-            // Register the events
-            registerEvents();
-        });
+                // Register the events
+                registerEvents();
+            });
+
+            // We've successfully updated the dom, prevent unwanted updates
+            firstUpdate = false;
+        }
     }
 
     function update () {
@@ -318,15 +325,7 @@
             updateWidth(getOption('width', 400));
         }
 
-        if (firstUpdate) {
-            // If there has not yet been a push to the dom, push the
-            // Hipbox elements to the dom (once the dom has finished loading).
-            updateDom();
-
-            // We've successfully updated the dom, prevent unwanted updates
-            firstUpdate = false;
-        }
-
+        updateDom();
     }
 
     var domElement = parseElement(
