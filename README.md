@@ -113,11 +113,11 @@ Then change directories to the git repository, and run the following commands.
 
 ```bash
 npm install
-gulp
+gulp build
 ```
 
 The result is a directory named `dist` in the root of the project, containing both the CSS and Javascript minified code.
 
 ## Example
 
-![Example Screenshot](-https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)
+![Example Screenshot](https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)

@@ -34,8 +34,10 @@ gulp.task('css', function () {
 
 gulp.task('watch', function () {
     var files = [].concat(paths.js, paths.css);
-    gulp.watch(files, ['test', 'js', 'css']);
+    gulp.watch(files, ['build']);
 });
 
 gulp.task('test', ['jshint']);
-gulp.task('default', ['test', 'js', 'css', 'watch']);
+gulp.task('build', ['test', 'js', 'css']);
+
+gulp.task('default', ['build', 'watch']);
