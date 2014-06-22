@@ -32,4 +32,5 @@ gulp.task('css', function () {
         .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('default', ['jshint', 'js', 'css']);
+gulp.task('test', ['jshint']);
+gulp.task('default', ['test', 'js', 'css']);
