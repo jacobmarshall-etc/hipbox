@@ -39,47 +39,49 @@ This API allows the modification of all [options](#options). All options are cac
 
 - **title** [String]
 
-  The text to display in the heading within the button segment.
+  The text to display in the heading.
 
-  *Note: HTML is stripped from this text by default, only text is allowed.*
+  *Note: HTML is stripped from this text by default.*
 
-- **caption** [String]
+- **caption** [String] Optional
 
   The small text to display under the title.
 
-  *Note: Also like the title option, this option only accepts text, HTML is stripped.*
+  *Note: HTML is stripped from this text by default.*
 
-- **message** [String]
+- **message** [String] Optional
 
   The message to display to a guest, when they enter your HipChat room.
 
 - **key** [String]
 
-  The key to your room.
+  The key to your public HipChat room.
 
 - **position** [String]
 
-  The position to display the chatbox on the users screen. Must be one of the following options; `top left`, `top right`, `bottom left`, `bottom right`. These options can also be separated with a dash (`-`) instead of a space.
+  The position to display the chatbox on the users screen. Must be one of the following options; `top left`, `top right`, `bottom left`, `bottom right`.
+
+  These options can also be separated with a dash (`-`) instead of a space.
 
 - **timezone** [String] Optional
 
   The timezone in which HipChat uses to display timestamps. By default this is automatically detected, but if it cannot be, it falls back to `PST`.
 
-- **animations** [Boolean]
+- **animations** [Boolean] Optional
 
-  Sets the CSS animations on/off. Default is set to `true` for browsers that support it.
+  Sets the CSS animations on/off. Default is `true` (for browsers that support CSS animations).
 
 - **domain** [String] Experimental
 
-  The domain in which the HipChat server resides. Default is set to `http://www.hipchat.com`.
+  The domain in which the HipChat server resides. Default is `http://www.hipchat.com`.
 
 - **width** [Number]
 
-  The width of the chat window. There is no default, you *must* set one.
+  The width of the chat box. Default is `400`.
 
 - **height** [Number]
 
-  The height of the chat window. Again, there is no default, you *must* set one.
+  The height of the chat box. Default is `500`.
 
 - **open** [Boolean]
 
@@ -118,4 +120,4 @@ The result is a directory named `dist` in the root of the project, containing bo
 
 ## Example
 
-![Example Screenshot](https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)
+![Example Screenshot](-https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)
