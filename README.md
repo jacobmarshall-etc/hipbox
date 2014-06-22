@@ -32,8 +32,8 @@ Compatibility
 | ----------------- | ------- |
 | Internet Explorer | 8+      |
 | Mozilla Firefox   | 3.5+    |
-| Google Chrome     | *       |
-| Apple Safari      | *       |
+| Google Chrome     | `?`     |
+| Apple Safari      | `?`     |
 | Opera             | 10+     |
 
 Options
