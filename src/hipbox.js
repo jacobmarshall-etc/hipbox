@@ -11,28 +11,6 @@
         // An empty function with no operations :(
         noop = function () {};
 
-    var domElement = parseElement(
-        '<div id="hb:container" class="hipbox">' +
-            '<div id="hb:inner" class="hipbox-inner">' +
-                '<div id="hb:heading" class="hipbox-heading">' +
-                    '<h1 id="hb:title" class="hipbox-title"></h1>' +
-                    '<p id="hb:caption" class="hipbox-caption"></p>' +
-                '</div>' +
-                '<div id="hb:content" class="hipbox-content">' +
-                    '<iframe src="about:blank" id="hb:frame" class="hipbox-frame"></iframe>' +
-                '</div>' +
-            '</div>' +
-        '</div>'
-    );
-
-    whenReady(function () {
-        // Add the dom element to the body
-        document.body.appendChild(domElement);
-
-        // Register the events
-        registerEvents();
-    });
-
     function whenReady (cb, ctx) {
         var hasInvoked = false;
 
@@ -45,7 +23,7 @@
                 document.readyState === 'interactive')) {
                 // Prevent the callback from invoking more than once
                 hasInvoked = true;
-                cb && cb.call(ctx);
+                cb.call(ctx);
             }
         };
 
@@ -89,7 +67,7 @@
 
     function getTimezone () {
         // Extract the timezone from a newly constructed date object
-        return (new Date).toString().match(/\(([A-Za-z\s].*)\)/)[1] || 'PST';
+        return new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1] || 'PST';
     }
 
     function addEvent (node, event, cb) {
@@ -133,8 +111,13 @@
     }
 
     function modifyClass (node, className, add) {
-        // If we want to add the class, run the appropriate function
-        add ? addClass(node, className) : removeClass(node, className);
+        if (add) {
+            // If we want to add the class, call addClass
+            addClass(node, className);
+        } else {
+            // If we want to remove the class, call removeClass
+            removeClass(node, className);
+        }
     }
 
     function extend (obj, other) {
@@ -167,8 +150,7 @@
         for (var key in items) {
             if (items.hasOwnProperty(key)) {
                 // Construct a valid url segment (parsed)
-                parts.push(encodeURIComponent(key) + '='
-                    + encodeURIComponent(items[key]));
+                parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(items[key]));
             }
         }
 
@@ -185,7 +167,7 @@
             anonymous: true,
             minimal: true,
             timezone: options.timezone || getTimezone(),
-            welcome_msg: options.message || ''
+            'welcome_msg': options.message || ''
         });
 
         // Construct the valid HipChat room url
@@ -284,6 +266,28 @@
             contentElement.style.width = options.width + 'px';
         }
     }
+
+    var domElement = parseElement(
+        '<div id="hb:container" class="hipbox">' +
+            '<div id="hb:inner" class="hipbox-inner">' +
+                '<div id="hb:heading" class="hipbox-heading">' +
+                    '<h1 id="hb:title" class="hipbox-title"></h1>' +
+                    '<p id="hb:caption" class="hipbox-caption"></p>' +
+                '</div>' +
+                '<div id="hb:content" class="hipbox-content">' +
+                    '<iframe src="about:blank" id="hb:frame" class="hipbox-frame"></iframe>' +
+                '</div>' +
+            '</div>' +
+        '</div>'
+    );
+
+    whenReady(function () {
+        // Add the dom element to the body
+        document.body.appendChild(domElement);
+
+        // Register the events
+        registerEvents();
+    });
 
     self.config = function (opts) {
         // Store the old options + new
