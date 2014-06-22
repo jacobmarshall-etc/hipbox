@@ -1,5 +1,6 @@
-Hipbox
-======
+# Hipbox
+
+[![Travis CI](https://travis-ci.org/iampseudo/hipbox.svg)](https://travis-ci.org/iampseudo/hipbox)
 
 A lightweight embeddable Hipchat box
 
@@ -7,8 +8,7 @@ Please note: this project is a work in progress, if you do decide to use it, ple
 
 Hipbox has no dependencies on any other libraries.
 
-API
----
+## API
 
 **Hipbox.config**
 
@@ -23,8 +23,7 @@ Hipbox.config({
 
 This API allows the modification of all [options](#options). All options are cached within a private scope, and whenever a change is made, only the options that have changed are used to make any DOM modifications.
 
-Compatibility
----
+## Compatibility
 
 *This project has not been tested against all browsers, but the table below has been put together based on core Javascript functionality browsers do & don't support. If you believe this table is incorrect, please create a [Github Issue](https://github.com/iampseudo/hipbox/issues).*
 
@@ -36,8 +35,7 @@ Compatibility
 | Apple Safari      | `?`     |
 | Opera             | 10+     |
 
-Options
----
+## Options
 
 - **title** [String]
 
@@ -105,8 +103,7 @@ Options
 
   Same as the afterOpen callback, but invoked whenever the chat box is closed.
 
-Build
----
+## Build
 
 To build, you will need to install [NPM](https://www.npmjs.org/) which comes bundled with [Node.js](http://nodejs.org/download/).
 
@@ -119,7 +116,6 @@ gulp
 
 The result is a directory named `dist` in the root of the project, containing both the CSS and Javascript minified code.
 
-Example
----
+## Example
 
 ![Example Screenshot](https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)
