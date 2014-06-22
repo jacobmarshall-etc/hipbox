@@ -26,6 +26,8 @@ This API allows the modification of all [options](#options). All options are cac
 Compatibility
 ---
 
+*This project has not been tested against all browsers, but the table below has been put together based on core Javascript functionality browsers do & don't support. If you believe this table is incorrect, please create a [Github Issue](https://github.com/iampseudo/hipbox/issues).*
+
 | Browser           | Version |
 | ----------------- | ------- |
 | Internet Explorer | 8+      |
@@ -59,7 +61,7 @@ Options
 
 - **position** [String]
 
-  The position to display the chatbox on the users screen. Must be one of the following options; `top left`, `top right`, `bottom left`, `bottom right`. These options can also be seperated with a dash (`-`) instead of a space.
+  The position to display the chatbox on the users screen. Must be one of the following options; `top left`, `top right`, `bottom left`, `bottom right`. These options can also be separated with a dash (`-`) instead of a space.
 
 - **timezone** [String] Optional
 
