@@ -7,19 +7,13 @@
 <body>
     <script src="../dist/hipbox.js"></script>
     <script>
-        Hipbox.config({
-            title: 'Ask us anything!',
-
-            key: 'gsLiTJwzU',
-            width: 360,
-            height: 400,
-
-            whenOpen: function () {
-                Hipbox.config({
-                    caption: 'Powered by HipChat'
-                });
-            }
-        });
+        // Does not work, must provide all the options
+        Hipbox
+            .set('title', 'Ask us anything!')
+            .set('key', 'gsLiTJwzU')
+            .set('width', 360)
+            .set('height', 400)
+            .init();
     </script>
 </body>
 </html>
