@@ -24,7 +24,7 @@
 
     function log (message) {
         if ('console' in window) {
-            window.console.log(message);
+            window.console.log('[Hipbox] ' + message);
         }
     }
 
@@ -244,7 +244,8 @@
 
             params({
                 anonymous: true,
-                compact: true,
+                minimal: true,
+                timezone: getConfig('timezone'),
 
                 // Note: wrapped in single quotes for JSHint
                 'welcome_msg': getConfig('message')
@@ -252,13 +253,43 @@
         );
     }
 
+    function getUnsetConfig () {
+        var items = {};
+
+        for (var key in defaults) {
+            // If the current configuration does not have a key with the same
+            // as one of the defaults.
+            if (defaults.hasOwnProperty(key) && ! (key in config)) {
+                items[key] = defaults[key];
+            }
+        }
+
+        return items;
+    }
+
     // Setup
+
+    var addUnsetConfig = onceFunction(function () {
+        delayFunction(function () {
+            // Add any config items that have not yet been set
+            setConfigs(getUnsetConfig());
+        })();
+    });
 
     var addToDocument = onceFunction(function () {
         whenReady(function () {
             log('Appending element to document...');
             document.body.appendChild(dom);
         });
+    });
+
+    var setupFrame = onceFunction(function () {
+        findElement('frame').src = getChatUrl();
+    });
+
+    var attachEvents = onceFunction(function () {
+        var target = findElement('heading');
+        addEvent(target, 'click', self.toggle);
     });
 
     // Configuration
@@ -287,13 +318,6 @@
         }
     }
 
-    function getFullConfig (items) {
-        // Concatenate an entire set of configuration items, given the
-        // defaults, current items, and manual overrides.
-        var data = extend(clone(defaults), config);
-        return extend(data, items);
-    }
-
     // Hooks
 
     function setConfigHook (name, value, old) {
@@ -314,6 +338,10 @@
         },
 
         'open': function (value) {
+            if (value === true) {
+                setupFrame();
+            }
+
             setClass(dom, 'hipbox-open', value);
         },
 
@@ -338,12 +366,15 @@
 
     // Implementation
 
-    self.config = api(function (items) {
-        var conf = getFullConfig(items);
-        setConfigs(conf);
+    function init () {
+        addUnsetConfig();
+        addToDocument();
+        attachEvents();
+    }
 
-        // Automatically initiate the plugin
-        self.init();
+    self.config = api(function (items) {
+        setConfigs(items);
+        init();
     });
 
     self.set = api(function (name, value) {
@@ -358,9 +389,12 @@
         setConfig('open', false);
     });
 
-    self.init = api(function () {
-        addToDocument();
+    self.toggle = api(function () {
+        // Invert the current config for 'open'
+        setConfig('open', ! getConfig('open'));
     });
+
+    self.init = api(init);
 
     // Publish a set of defaults (read-only).
     self.defaults = clone(defaults);
