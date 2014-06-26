@@ -1,6 +1,7 @@
 # Hipbox
 
 [![Travis CI](https://travis-ci.org/iampseudo/hipbox.svg)](https://travis-ci.org/iampseudo/hipbox)
+[![devDependency Status](https://david-dm.org/iampseudo/hipbox/dev-status.svg)](https://david-dm.org/iampseudo/hipbox#info=devDependencies)
 
 A lightweight embeddable Hipchat box
 
