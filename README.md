@@ -4,6 +4,7 @@
 [![devDependency Status](https://david-dm.org/iampseudo/hipbox/dev-status.svg)](https://david-dm.org/iampseudo/hipbox#info=devDependencies)
 [![Release](http://img.shields.io/github/release/iampseudo/hipbox.svg)](https://github.com/iampseudo/hipbox)
 [![GitHub Issues](http://img.shields.io/github/issues/iampseudo/hipbox.svg)](https://github.com/iampseudo/hipbox/issues)
+[![MIT Licence](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/iampseudo/hipbox/blob/master/LICENSE)
 
 A lightweight embeddable Hipchat box
 
