@@ -1,10 +1,10 @@
 # Hipbox
 
-[![Travis CI](https://travis-ci.org/iampseudo/hipbox.svg)](https://travis-ci.org/iampseudo/hipbox)
-[![devDependency Status](https://david-dm.org/iampseudo/hipbox/dev-status.svg)](https://david-dm.org/iampseudo/hipbox#info=devDependencies)
-[![Release](http://img.shields.io/github/release/iampseudo/hipbox.svg)](https://github.com/iampseudo/hipbox)
-[![GitHub Issues](http://img.shields.io/github/issues/iampseudo/hipbox.svg)](https://github.com/iampseudo/hipbox/issues)
-[![MIT Licence](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/iampseudo/hipbox/blob/master/LICENSE)
+[![Travis CI](https://travis-ci.org/jacobmarshall/hipbox.svg)](https://travis-ci.org/jacobmarshall/hipbox)
+[![devDependency Status](https://david-dm.org/jacobmarshall/hipbox/dev-status.svg)](https://david-dm.org/jacobmarshall/hipbox#info=devDependencies)
+[![Release](http://img.shields.io/github/release/jacobmarshall/hipbox.svg)](https://github.com/jacobmarshall/hipbox)
+[![GitHub Issues](http://img.shields.io/github/issues/jacobmarshall/hipbox.svg)](https://github.com/jacobmarshall/hipbox/issues)
+[![MIT Licence](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jacobmarshall/hipbox/blob/master/LICENSE)
 
 A lightweight embeddable Hipchat box
 
@@ -29,7 +29,7 @@ This API allows the modification of all [options](#options). All options are cac
 
 ## Compatibility
 
-*This project has not been tested against all browsers, but the table below has been put together based on core Javascript functionality browsers do & don't support. If you believe this table is incorrect, please create a [Github Issue](https://github.com/iampseudo/hipbox/issues).*
+*This project has not been tested against all browsers, but the table below has been put together based on core Javascript functionality browsers do & don't support. If you believe this table is incorrect, please create a [Github Issue](https://github.com/jacobmarshall/hipbox/issues).*
 
 | Browser           | Version |
 | ----------------- | ------- |
@@ -124,4 +124,4 @@ The result is a directory named `dist` in the root of the project, containing bo
 
 ## Example
 
-![Example Screenshot](https://raw.githubusercontent.com/iampseudo/hipbox/master/example/screenshot.png)
+![Example Screenshot](https://raw.githubusercontent.com/jacobmarshall/hipbox/master/example/screenshot.png)
